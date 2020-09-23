@@ -20,3 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('upr')
+    ->namespace('Upr')
+    ->middleware('auth')
+    ->name('upr.')
+    ->group(function () {
+      Route::resource('index', 'ApartmentController');
+    });
+
+Route::get('/index', 'ApartmentController@index')->name('apartments.index');
+
+Route::get('/show/{apartment}', 'ApartmentController@show')->name('apartments.show');
