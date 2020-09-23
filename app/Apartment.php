@@ -28,11 +28,11 @@ class Apartment extends Model
     }
 
     public function sponsorships() {
-        return $this->belongsToMany('App\Sponsorship')
+        return $this->belongsToMany('App\Sponsorship');
     }
 
     public function services() {
-        return $this->belongsToMany('App\Service')
+        return $this->belongsToMany('App\Service');
     }
 
     public function images() {
