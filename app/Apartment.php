@@ -19,6 +19,8 @@ class Apartment extends Model
       'price',
       'image',
       'user_id',
+      'city',
+      'country',
     ];
 
     public function user() {
