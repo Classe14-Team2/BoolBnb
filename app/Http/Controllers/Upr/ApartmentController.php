@@ -60,10 +60,11 @@ class ApartmentController extends Controller
 
         // Nuova istanza Appartamento
         $newApartment = new Apartment();
-        $newApartment->fill($request_data);
         $newApartment->user_id = Auth::id();
-        // dd($newApartment->id);
+        $newApartment->fill($request_data);
 
+        // dd($newApartment->user_id);
+        $newApartment->save();
 
 
         if (isset($request_data['services'])) {
@@ -76,7 +77,7 @@ class ApartmentController extends Controller
           $newApartment->image = $path;
         }
 
-        $newApartment->save();
+
 
         // Mail::to($new_post->user->email)->send(new PostCreatedMail());
 
