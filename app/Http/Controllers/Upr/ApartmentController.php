@@ -64,6 +64,13 @@ class ApartmentController extends Controller
         $newApartment->fill($request_data);
 
         // dd($newApartment->user_id);
+
+        if (isset($request_data['image'])) {
+          $path = $request->file('image')->store('images', 'public');
+          $newApartment->image = $path;
+        } else {
+          $newApartment->image = '';
+        }
         $newApartment->save();
 
 
@@ -72,10 +79,7 @@ class ApartmentController extends Controller
         }
 
 
-        if (isset($request_data['image'])) {
-          $path = $request->file('image')->store('images', 'public');
-          $newApartment->image = $path;
-        }
+
 
 
 
@@ -155,9 +159,13 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+      $apartment->services()->detach();
+      $apartment->sponsorships()->detach();
+      $apartment->delete();
+       // Mail::to($post->user->email)->send(new PostDeletedMail());
+       return redirect()->route('upr.apartments.index');
     }
 
     public function validationData() {

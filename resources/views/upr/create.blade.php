@@ -66,7 +66,7 @@
 
     <div>
       <label for="image">Upload image</label>
-      <input type="file" name="image" accept="image/*">
+      <input type="file" name="image" accept="image/*" required>
     </div>
 
     <div>

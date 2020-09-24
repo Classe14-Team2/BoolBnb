@@ -16,7 +16,7 @@
       <li><h3>Latitudine:</h3>{{ $apartment->lat }}</li>
       <li><h3>Longitudine:</h3>{{ $apartment->lon }}</li>
       <li><h3>Prezzo:</h3>{{ $apartment->price }} €</li>
-      <li> <img src="{{ $apartment->image }}" alt=""> </li>
+      <li><img src=" {{ asset('storage') . '/' . $apartment->image }} " alt="{{$apartment->title}}"></li>
       <li><h3>Proprietario:</h3>{{ $apartment->user->name }}</li>
       <li><h3>Città:</h3>{{ $apartment->city }}</li>
       <li><h3>Stato:</h3>{{ $apartment->country }}</li>

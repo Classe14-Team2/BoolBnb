@@ -5,6 +5,8 @@
   <h1>Benvenuto {{ $user->name }}</h1>
 
   <a href="{{ route('upr.apartments.create') }}">Crea un nuovo appartamento</a>
+  oppure
+  <a href="{{ route('apartments.index') }}">Visita gli appartamenti già presenti</a>
 
   @foreach ($apartments as $apartment)
     @if ($user->id == $apartment->user_id)
@@ -33,6 +35,13 @@
             {{ $apartment->country }}
           </li>
         </ul>
+        <div>
+          <form class="delete" action="{{ route('upr.apartments.destroy', $apartment) }}" method="post">
+          @csrf
+          @method('DELETE')
+            <input type="submit" value="Elimina">
+          </form>
+        </div>
       </div>
     @endif
   @endforeach
