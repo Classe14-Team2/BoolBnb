@@ -20,15 +20,15 @@ class CreateApartmentsTable extends Migration
                   ->references('id')
                   ->on('users');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('rooms');
             $table->integer('beds');
             $table->integer('baths');
             $table->integer('square_meters');
             $table->string('address');
-            $table->decimal('lat', 10, 7);
-            $table->decimal('lon', 10, 7);
-            $table->decimal('price', 5, 2);
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lon', 10, 7)->nullable();
+            $table->decimal('price', 5, 2)->nullable();
             $table->text('image');
             $table->timestamps();
         });

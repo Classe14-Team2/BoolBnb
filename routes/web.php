@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', 'ApartmentController@index', function () {
+//     return view('index');
+// });
 
 Auth::routes();
 
@@ -26,9 +26,9 @@ Route::prefix('upr')
     ->middleware('auth')
     ->name('upr.')
     ->group(function () {
-      Route::resource('index', 'ApartmentController');
+      Route::resource('apartments', 'ApartmentController');
     });
 
-Route::get('/index', 'ApartmentController@index')->name('apartments.index');
+Route::get('/', 'ApartmentController@index')->name('apartments.index');
 
 Route::get('/show/{apartment}', 'ApartmentController@show')->name('apartments.show');

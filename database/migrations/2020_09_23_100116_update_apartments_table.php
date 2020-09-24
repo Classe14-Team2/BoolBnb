@@ -14,8 +14,8 @@ class UpdateApartmentsTable extends Migration
     public function up()
     {
         Schema::table('apartments', function (Blueprint $table) {
-            $table->string('city');
-            $table->string('country');
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
         });
     }
 

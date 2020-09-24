@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Apartment;
 use App\User;
+use App\Service;
 
 class ApartmentController extends Controller
 {
@@ -20,6 +21,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::all();
         $user = Auth::user();
+
         return view('upr.index', compact('apartments', 'user'));
     }
 
@@ -30,7 +32,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+      $apartments = Apartment::all();
+      $services = Service::all();
+
+      return view('upr.create', compact('apartments', 'services'));
     }
 
     /**
@@ -41,7 +46,41 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!Auth::check()) {
+          abort('404');
+        }
+
+        // Validazione
+        $request->validate($this->validationData());
+
+        $request_data = $request->all();
+        // dd($request_data);
+
+
+
+        // Nuova istanza Appartamento
+        $newApartment = new Apartment();
+        $newApartment->fill($request_data);
+        $newApartment->user_id = Auth::id();
+        // dd($newApartment->id);
+
+
+
+        if (isset($request_data['services'])) {
+          $newApartment->services()->sync($request_data['services']);
+        }
+
+
+        if (isset($request_data['image'])) {
+          $path = $request->file('image')->store('images', 'public');
+          $newApartment->image = $path;
+        }
+
+        $newApartment->save();
+
+        // Mail::to($new_post->user->email)->send(new PostCreatedMail());
+
+        return redirect()->route('upr.apartments.show', $newApartment);
     }
 
     /**
@@ -53,7 +92,8 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
       $users = User::all();
-      return view('upr.show', compact('apartment', 'users'));
+      $services = Service::all();
+      return view('upr.show', compact('apartment', 'users', 'services'));
     }
 
     /**
@@ -62,9 +102,11 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+      $services = Service::all();
+
+      return view('upr.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -74,9 +116,36 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+      if (!Auth::check()) {
+      abort('404');
+    }
+
+    // Validazione
+    $request->validate($this->validationData());
+
+    $request_data = $request->all();
+
+    if (isset($request_data['services'])) {
+      $apartment->services()->sync($request_data['services']);
+    } else {
+      $apartment->services()->detach();
+    }
+
+
+    if (isset($request_data['image'])) {
+      $path = $request->file('image')->store('images', 'public');
+      $apartment->image = $path;
+    } else {
+      $apartment->image = '';
+    }
+
+    $apartment->update();
+
+    // Mail::to($post->user->email)->send(new PostEditedMail());
+
+    return redirect()->route('upr.apartments.show', $apartment);
     }
 
     /**
@@ -89,4 +158,17 @@ class ApartmentController extends Controller
     {
         //
     }
+
+    public function validationData() {
+       return [
+         'title' => 'required|max:255',
+         'content' => 'max:1000',
+         'rooms' => 'required|min:1|max:10',
+         'beds' => 'required|min:1|max:10',
+         'baths' => 'required|min:1|max:5',
+         'square_meters' => 'required|numeric|min:50|max:350',
+         'address' => 'required|max:300',
+         'image' => 'image',
+       ];
+     }
 }
