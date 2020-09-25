@@ -23,6 +23,19 @@
     </ul>
   </div>
 
+  <div class="">
+
+    <input type="email" name="email" value="" placeholder=
+      @if ($user_auth === null)
+        "Inserisci la tua mail"
+      @else
+        {{$user_auth->email}}
+      @endif
+    >
+
+    <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+  </div>
+
   <a href="{{ route('apartments.index') }}">Torna alla lista</a>
 
 @endsection

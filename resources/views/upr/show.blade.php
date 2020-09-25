@@ -20,12 +20,22 @@
       <li><h3>Proprietario:</h3>{{ $apartment->user->name }}</li>
       <li><h3>Città:</h3>{{ $apartment->city }}</li>
       <li><h3>Stato:</h3>{{ $apartment->country }}</li>
-      <li><h3>Servizi:</h3>@foreach ($apartment->services as $service)
-
-        {{ $service->type }}
-      @endforeach</li>
+      <li><h3>Servizi:</h3>
+        @foreach ($apartment->services as $service)
+          {{ $service->type }}
+        @endforeach
+      </li>
     </ul>
     <a href="{{ route('upr.apartments.edit', $apartment) }}">Modifica annuncio</a>
+  </div>
+
+  <div class="">
+    <input type="email" name="email" value="" placeholder=
+      {{-- @foreach ($users as $user) --}}
+        {{ $user_auth->email }}
+      {{-- @endforeach> --}}
+    >
+    <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
   </div>
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>

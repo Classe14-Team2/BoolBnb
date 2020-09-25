@@ -98,7 +98,9 @@ class ApartmentController extends Controller
     {
       $users = User::all();
       $services = Service::all();
-      return view('upr.show', compact('apartment', 'users', 'services'));
+      $user_auth = Auth::user();
+      // dd($users)
+      return view('upr.show', compact('apartment', 'users', 'services', 'user_auth'));
     }
 
     /**

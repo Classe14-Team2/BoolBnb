@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\User;
 
@@ -16,6 +17,7 @@ class ApartmentController extends Controller
 
   public function show(Apartment $apartment) {
       $users = User::all();
-      return view('show', compact('apartment', 'users'));
+      $user_auth = Auth::user();
+      return view('show', compact('apartment', 'users', 'user_auth'));
     }
 }
