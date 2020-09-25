@@ -32,3 +32,5 @@ Route::prefix('upr')
 Route::get('/', 'ApartmentController@index')->name('apartments.index');
 
 Route::get('/show/{apartment}', 'ApartmentController@show')->name('apartments.show');
+
+Route::post('/show', 'MessageController@store')->name('message.store');

@@ -30,8 +30,29 @@
   </div>
 
   <div class="">
-    <input  type="email" name="email" value= {{ $user_auth->email }} placeholder="Inserisci la mail">
-    <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+    <form class="" action="{{ route('message.store') }}" method="post">
+      @csrf
+      @method('POST')
+
+      <div class="">
+        <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input  type="email" name="email" value= {{ $user_auth->email }} placeholder="Inserisci la mail">
+      </div>
+
+      <div>
+        <label for="content">Content</label>
+        <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+      </div>
+
+      <div>
+        <input type="submit" name="" value="Send">
+      </div>
+
+    </form>
   </div>
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>
