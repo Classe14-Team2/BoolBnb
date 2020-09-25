@@ -27,6 +27,7 @@ Route::prefix('upr')
     ->name('upr.')
     ->group(function () {
       Route::resource('apartments', 'ApartmentController');
+      Route::get('messages', 'MessageController@index')->name('messages');
     });
 
 Route::get('/', 'ApartmentController@index')->name('apartments.index');

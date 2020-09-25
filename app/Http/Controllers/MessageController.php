@@ -10,13 +10,13 @@ class MessageController extends Controller
 {
   public function store(Request $request)
   {
-      $apartments = Apartment::all();
+
       $newMessage = new Message();
       $newMessage->email = $request['email'];
       $newMessage->content = $request['content'];
+      $newMessage->apartment_id = $request['apartment_id'];
       $newMessage->save();
 
-      dd($request['content']);
-      return view('index', compact('apartments'));
+      return redirect()->route('apartments.index');
   }
 }

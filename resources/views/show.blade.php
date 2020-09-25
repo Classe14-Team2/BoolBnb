@@ -23,19 +23,38 @@
     </ul>
   </div>
 
-  <div class="">
+  @if ($user_auth->id !== $apartment->user_id)
+    <div class="">
+      <form class="" action="{{ route('message.store') }}" method="post">
+        @csrf
+        @method('POST')
 
-    <input type="email" name="email"
+        <div>
+          <input  type="hidden" name="apartment_id" value= {{ $apartment->id }}>
+        </div>
 
-    value=
-      "@if ($user_auth !== null)
-        {{$user_auth->email}}
-      @endif"
 
-    placeholder="Inserisci la tua mail">
+        <div>
+          <label for="email">Email</label>
+          <input  type="email" name="email" value=
+            "@if ($user_auth !== null)
+              {{$user_auth->email}}
+            @endif"
+            placeholder="Inserisci la mail">
+        </div>
 
-    <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
-  </div>
+        <div>
+          <label for="content">Content</label>
+          <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+        </div>
+
+        <div>
+          <input type="submit" name="" value="Send">
+        </div>
+
+      </form>
+    </div>
+  @endif
 
   <a href="{{ route('apartments.index') }}">Torna alla lista</a>
 
