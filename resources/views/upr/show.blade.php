@@ -30,11 +30,7 @@
   </div>
 
   <div class="">
-    <input type="email" name="email" value="" placeholder=
-      {{-- @foreach ($users as $user) --}}
-        {{ $user_auth->email }}
-      {{-- @endforeach> --}}
-    >
+    <input  type="email" name="email" value= {{ $user_auth->email }} placeholder="Inserisci la mail">
     <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
   </div>
 

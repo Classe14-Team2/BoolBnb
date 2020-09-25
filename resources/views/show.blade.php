@@ -25,13 +25,14 @@
 
   <div class="">
 
-    <input type="email" name="email" value="" placeholder=
-      @if ($user_auth === null)
-        "Inserisci la tua mail"
-      @else
+    <input type="email" name="email"
+
+    value=
+      "@if ($user_auth !== null)
         {{$user_auth->email}}
-      @endif
-    >
+      @endif"
+
+    placeholder="Inserisci la tua mail">
 
     <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
   </div>

@@ -78,6 +78,12 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer>
+          <div class="container">
+          </div>
+          IO SONO UN FOOTER
+        </footer>
     </div>
 </body>
 </html>
