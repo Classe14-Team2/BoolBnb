@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\User;
 use App\Message;
+
 
 class MessageController extends Controller
 {
-  public function store(Request $request)
+  
+  public function store(Request $request, Apartment $apartment)
   {
-      $apartments = Apartment::all();
-      $newMessage = new Message();
-      $newMessage->email = $request['email'];
-      $newMessage->content = $request['content'];
-      $newMessage->save();
+    $newMessage = new Message();
+    $newMessage->email = $request['email'];
+    $newMessage->content = $request['content'];
+    $newMessage->apartment_id = $request['aparment'];
+    $newMessage->save();
 
-      dd($request['content']);
-      return view('index', compact('apartments'));
+    return redirect()->route('apartments.index', $newMessage);
   }
 }

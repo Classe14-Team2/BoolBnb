@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
 
@@ -23,20 +23,43 @@
     </ul>
   </div>
 
-  <div class="">
 
-    <input type="email" name="email"
+{{-- @foreach ($users as $user) --}}
+  @if ($user_auth->id !== $apartment->user_id)
+    <div class="">
+      <form class="" action="{{ route('message.store', $apartment) }}" method="post">
+        @csrf
+        @method('POST')
 
-    value=
-      "@if ($user_auth !== null)
-        {{$user_auth->email}}
-      @endif"
+        <div>
+          <input  type="hidden" name="apartment_id" value= {{ $apartment->id }}>
+        </div>
 
-    placeholder="Inserisci la tua mail">
 
-    <textarea name="name" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
-  </div>
+        <div>
+          <label for="email">Email</label>
+          <input  type="email" name="email" value=
+            "@if ($user_auth !== null)
+              {{$user_auth->email}}
+            @endif"
+            placeholder="Inserisci la mail">
+        </div>
 
-  <a href="{{ route('apartments.index') }}">Torna alla lista</a>
+        <div>
+          <label for="content">Content</label>
+          <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+        </div>
+
+        <div>
+          <input type="submit" name="" value="Send">
+        </div>
+
+      </form>
+    </div>
+  @endif
+{{-- @endforeach --}}
+
+
+  <a href="{{ route('apartments.index') }}">Torna indietro</a>
 
 @endsection

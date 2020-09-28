@@ -21,8 +21,8 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::all();
         $user = Auth::user();
-
-        return view('upr.index', compact('apartments', 'user'));
+        // dd('sono dentro appartamenti upr');
+        return view('upr.apartments.index', compact('apartments', 'user'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ApartmentController extends Controller
       $apartments = Apartment::all();
       $services = Service::all();
 
-      return view('upr.create', compact('apartments', 'services'));
+      return view('upr.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ApartmentController extends Controller
       $services = Service::all();
       $user_auth = Auth::user();
       // dd($users)
-      return view('upr.show', compact('apartment', 'users', 'services', 'user_auth'));
+      return view('upr.apartments.show', compact('apartment', 'users', 'services', 'user_auth'));
     }
 
     /**

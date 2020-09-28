@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
 
@@ -26,34 +26,39 @@
         @endforeach
       </li>
     </ul>
-    <a href="{{ route('upr.apartments.edit', $apartment) }}">Modifica annuncio</a>
+    {{-- <a href="{{ route('upr.apartment.edit') }}">Modifica annuncio</a> --}}
   </div>
 
-  <div class="">
-    <form class="" action="{{ route('message.store') }}" method="post">
-      @csrf
-      @method('POST')
+  @if ($user_auth->id !== $apartment->user_id)
+    <div class="">
+      <form class="" action="{{ route('message.store') }}" method="post">
+        @csrf
+        @method('POST')
 
-      <div class="">
-        <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
-      </div>
+        <div>
+          <input  type="hidden" name="apartment_id" value= {{ $apartment->id }}>
+        </div>
 
-      <div>
-        <label for="email">Email</label>
-        <input  type="email" name="email" value= {{ $user_auth->email }} placeholder="Inserisci la mail">
-      </div>
 
-      <div>
-        <label for="content">Content</label>
-        <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
-      </div>
+        <div>
+          <label for="email">Email</label>
+          <input  type="email" name="email" value= {{ $user_auth->email }} placeholder="Inserisci la mail">
+        </div>
 
-      <div>
-        <input type="submit" name="" value="Send">
-      </div>
+        <div>
+          <label for="content">Content</label>
+          <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+        </div>
 
-    </form>
-  </div>
+        <div>
+          <input type="submit" name="" value="Send">
+        </div>
+
+      </form>
+    </div>
+  @else
+     <a href="{{ route('upr.messages') }}">Leggi i messaggi ricevuti</a>
+  @endif 
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>
 
