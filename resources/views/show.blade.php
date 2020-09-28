@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
 
@@ -23,39 +23,43 @@
     </ul>
   </div>
 
-  @if ($user_auth->id !== $apartment->user_id)
-    <div class="">
-      <form class="" action="{{ route('message.store') }}" method="post">
-        @csrf
-        @method('POST')
 
-        <div>
-          <input  type="hidden" name="apartment_id" value= {{ $apartment->id }}>
-        </div>
+@php
+$isUserAuth = isset($user_auth);
+@endphp
 
+@if ($isUserAuth === false || $user_auth->id !== $apartment->user_id)
+  <div class="">
+    <form class="" action="{{ route('message.store' , $apartment) }}" method="post">
+      @csrf
+      @method('POST')
 
-        <div>
-          <label for="email">Email</label>
-          <input  type="email" name="email" value=
-            "@if ($user_auth !== null)
-              {{$user_auth->email}}
-            @endif"
-            placeholder="Inserisci la mail">
-        </div>
+      <div>
+        <input  type="hidden" name="apartment_id" value= {{ $apartment->id }}>
+      </div>
 
-        <div>
-          <label for="content">Content</label>
-          <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
-        </div>
+      <div>
+        <label for="email">Email</label>
+        <input  type="email" name="email" value= '' placeholder="Inserisci la mail">
+      </div>
 
-        <div>
-          <input type="submit" name="" value="Send">
-        </div>
+      <div>
+        <label for="content">Content</label>
+        <textarea name="content" rows="8" cols="80" placeholder="Inserisci il messaggio"></textarea>
+      </div>
 
-      </form>
-    </div>
+      <div>
+        <input type="submit" name="" value="Send">
+      </div>
+
+    </form>
+  </div>
+@else
+  @if ($user_auth->id === $apartment->user_id)
+    <a href="{{ route('upr.messages.index') }}">Leggi i messaggi ricevuti</a>
   @endif
+@endif
 
-  <a href="{{ route('apartments.index') }}">Torna alla lista</a>
+  <a href="{{ route('apartments.index') }}">Torna indietro</a>
 
 @endsection

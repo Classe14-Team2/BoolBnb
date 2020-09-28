@@ -45,7 +45,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 30px;
             }
 
             .links > a {
@@ -68,8 +68,11 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/upr') }}">Home</a>
                     @else
+
+                        <a href="{{ url('/apartments') }}">Mostra tutto</a>
+
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
@@ -81,10 +84,23 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    HOME PAGE CON L INPUT DI RICERCA
+                    <div class="">
+                      <input type="search" id="address-input" placeholder="Where are we going?" />
+
+                          <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+                          <script>
+                            var placesAutocomplete = places({
+                              appId: 'pl8NVK373KQV',
+                              apiKey: '143cda61ad7e01f203a17b1d8aeba3bb',
+                              container: document.querySelector('#address-input')
+                            });
+                          </script>
+                    </div>
+
                 </div>
 
-                <div class="links">
+                {{-- <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
@@ -93,7 +109,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </body>
