@@ -141,6 +141,7 @@ class ApartmentController extends Controller
     } else {
       $request_data['image'] = '';
     }
+    $apartment->update($request_data);
 
     $apartment->update($request_data);
 

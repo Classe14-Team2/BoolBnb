@@ -31,7 +31,7 @@
 
   @if ($user_auth->id  !== $apartment->user_id)
     <div class="">
-      <form class="" action="{{ route('message.store') }}" method="post">
+      <form class="" action="{{ route('message.store', $apartment) }}" method="post">
         @csrf
         @method('POST')
 
@@ -57,8 +57,8 @@
       </form>
     </div>
   @else
-    <a href="{{ route('upr.messages.index') }}">Leggi i messaggi ricevuti</a>
-  @endif
+ <a href="{{ route('upr.messages.index') }}">Leggi i messaggi ricevuti</a>
+  @endif 
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>
 
