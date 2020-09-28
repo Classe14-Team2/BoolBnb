@@ -21,8 +21,8 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::all();
         $user = Auth::user();
-
-        return view('upr.index', compact('apartments', 'user'));
+        // dd('sono dentro appartamenti upr');
+        return view('upr.apartments.index', compact('apartments', 'user'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ApartmentController extends Controller
       $apartments = Apartment::all();
       $services = Service::all();
 
-      return view('upr.create', compact('apartments', 'services'));
+      return view('upr.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -78,11 +78,6 @@ class ApartmentController extends Controller
           $newApartment->services()->sync($request_data['services']);
         }
 
-
-
-
-
-
         // Mail::to($new_post->user->email)->send(new PostCreatedMail());
 
         return redirect()->route('upr.apartments.show', $newApartment);
@@ -100,7 +95,7 @@ class ApartmentController extends Controller
       $services = Service::all();
       $user_auth = Auth::user();
       // dd($users)
-      return view('upr.show', compact('apartment', 'users', 'services', 'user_auth'));
+      return view('upr.apartments.show', compact('apartment', 'users', 'services', 'user_auth'));
     }
 
     /**
@@ -113,7 +108,7 @@ class ApartmentController extends Controller
     {
       $services = Service::all();
 
-      return view('upr.edit', compact('apartment', 'services'));
+      return view('upr.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -133,22 +128,22 @@ class ApartmentController extends Controller
     $request->validate($this->validationData());
 
     $request_data = $request->all();
-
+    
     if (isset($request_data['services'])) {
       $apartment->services()->sync($request_data['services']);
     } else {
       $apartment->services()->detach();
     }
 
-
     if (isset($request_data['image'])) {
       $path = $request->file('image')->store('images', 'public');
-      $apartment->image = $path;
+      $request_data['image'] = $path;
     } else {
-      $apartment->image = '';
+      $request_data['image'] = '';
     }
+    $apartment->update($request_data);
 
-    $apartment->update();
+    $apartment->update($request_data);
 
     // Mail::to($post->user->email)->send(new PostEditedMail());
 

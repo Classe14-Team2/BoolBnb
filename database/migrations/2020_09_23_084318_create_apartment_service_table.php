@@ -23,7 +23,6 @@ class CreateApartmentServiceTable extends Migration
             $table->foreign('service_id')
                   ->references('id')
                   ->on('services');
-
         });
     }
 
