@@ -26,10 +26,10 @@
         @endforeach
       </li>
     </ul>
-    {{-- <a href="{{ route('upr.apartment.edit') }}">Modifica annuncio</a> --}}
+    <a href="{{ route('upr.apartments.edit', $apartment) }}">Modifica annuncio</a>
   </div>
 
-  @if ($user_auth->id !== $apartment->user_id)
+  @if ($user_auth->id  !== $apartment->user_id)
     <div class="">
       <form class="" action="{{ route('message.store') }}" method="post">
         @csrf
@@ -57,8 +57,8 @@
       </form>
     </div>
   @else
-     <a href="{{ route('upr.messages') }}">Leggi i messaggi ricevuti</a>
-  @endif 
+    <a href="{{ route('upr.messages.index') }}">Leggi i messaggi ricevuti</a>
+  @endif
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>
 

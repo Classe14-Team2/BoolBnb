@@ -21,8 +21,12 @@ class ApartmentController extends Controller
   public function show(Apartment $apartment) {
 
       $users = User::all();
-      $user_auth = Auth::user();
 
-      return view('show', compact('apartment', 'users', 'user_auth'));
-    }
+      if (!empty(Auth::user())) {
+        $user_auth = Auth::user();
+        return view('show', compact('apartment', 'users', 'user_auth'));
+      } else {
+        return view('show', compact('apartment', 'users'));
+      }
+  }
 }
