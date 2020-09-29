@@ -37266,6 +37266,28 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+$(document).ready(function () {
+  $('#address-new').focusout(function () {
+    var citta = $('#address-new').val();
+    $.ajax({
+      url: 'https://places-dsn.algolia.net/1/places/query?query=' + citta,
+      method: 'GET',
+      success: function success(data) {
+        var coord = data.hits[0]._geoloc;
+        var lat = coord.lat;
+        var lng = coord.lng; // console.log(lat);
+        // console.log(lng);
+
+        $('#lat').val(lat);
+        $('#lon').val(lng);
+      },
+      error: function error() {}
+    });
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37331,8 +37353,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/giusepperotolo/Documents/htdocs/BoolBnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/giusepperotolo/Documents/htdocs/BoolBnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\mamp\htdocs\BoolBnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\mamp\htdocs\BoolBnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
