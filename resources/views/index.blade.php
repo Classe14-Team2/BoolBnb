@@ -3,7 +3,9 @@
 @section('content')
 
   <h1>Benvenuto</h1>
-
+<script>
+  window.onload = alert(localStorage.getItem("storageName"));
+</script>
   @foreach ($apartments as $apartment)
     <div class="">
       <h2>

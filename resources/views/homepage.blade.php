@@ -86,30 +86,37 @@
                 <div class="title m-b-md">
                     HOME PAGE CON L INPUT DI RICERCA
                     <div class="">
-                      <input type="search" id="address-input" placeholder="Where are we going?" />
+                      <input type="search" id="address" class="form-control" placeholder="Where are we going?" />
+                        <button onclick="cerca()">Cerca</button>
 
-                          <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
-                          <script>
-                            var placesAutocomplete = places({
-                              appId: 'pl8NVK373KQV',
-                              apiKey: '143cda61ad7e01f203a17b1d8aeba3bb',
-                              container: document.querySelector('#address-input')
-                            });
-                          </script>
+                  <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+
+                  <script>
+                  function cerca() {
+                     var getInput = document.querySelector('#address').value;
+                     console.log(getInput);
+                     localStorage.setItem("storageName",getInput);
+                  }
+
+                  (function() {
+                    var placesAutocomplete = places({
+                      appId: 'pl72UD0E1RWC',
+                      apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
+                      container: document.querySelector('#address')
+                    });
+
+                    // var $address = document.querySelector('#address-value')
+
+
+
+
+
+
+                      })();
+                      </script>
                     </div>
 
                 </div>
-
-                {{-- <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> --}}
             </div>
         </div>
     </body>
