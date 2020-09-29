@@ -1,8 +1,44 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Variables
+@import 'partials/variables';
+
+// Common
+@import 'partials/common';
+
+// Navbar
+@import 'partials/navbar';
+@import 'partials/footer';
+
+main{
+  background-color: lightgray; //Debug
+
+  .cs-search{
+    padding: 30vh 0;
+
+    background-color: lightgray;
+
+    h1{
+      margin: 50px 0;
+    }
+  }
+
+  .cs-sponsored{
+    background-color: lightblue;
+    padding: 50px 0;
+
+    h3{
+      margin: 20px 0;
+      text-transform: uppercase;
+    }
+
+    .row{
+      margin: 50px 0;
+    }
+  }
+
+}
