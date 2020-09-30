@@ -51,7 +51,15 @@
 
     <div>
       <label for="address">Address:</label><br>
-      <input type="text" name="address" value="{{ ($apartment->address) ? $apartment->address : old('address') }}" placeholder="Inserisci l'indirizzo">
+      <input name="address" type="search" id="address-new" class="form-control" placeholder="Inserisci l'indirizzo" value="{{ old('address')}}" required/>
+    </div>
+
+    <div>
+      <input id="lat" type="hidden" name="lat">
+    </div>
+
+    <div>
+      <input id="lon" type="hidden" name="lon">
     </div>
 
     <div class="chekboxes">
@@ -66,7 +74,7 @@
 
     <div>
       <label for="image">Upload image</label>
-      <input type="file" name="image" accept="image/*">
+      <input type="file" name="image" accept="image/*" required>
     </div>
 
     <div>
@@ -75,5 +83,19 @@
   </form>
 
   <a href="{{ route('upr.apartments.index') }}">Torna alla lista</a>
+
+  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+  <script>
+  (function() {
+    var placesAutocomplete = places({
+      appId: 'pl72UD0E1RWC',
+      apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
+      container: document.querySelector('#address-new'),
+
+    });
+  })();
+  </script>
 
 @endsection

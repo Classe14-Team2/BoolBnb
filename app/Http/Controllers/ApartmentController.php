@@ -20,13 +20,19 @@ class ApartmentController extends Controller
 
   public function show(Apartment $apartment) {
 
-      $users = User::all();
+    $users = User::all();
+    if (!empty(Auth::user())) {
+      $user_auth = Auth::user();
+      return view('show', compact('apartment', 'users', 'user_auth'));
+    } else {
+      return view('show', compact('apartment', 'users'));
+    }
+  }
 
-      if (!empty(Auth::user())) {
-        $user_auth = Auth::user();
-        return view('show', compact('apartment', 'users', 'user_auth'));
-      } else {
-        return view('show', compact('apartment', 'users'));
-      }
+  public function search()
+  {
+      $users = User::all();
+      $apartments = Apartment::all();
+      return view('search', compact('apartments', 'users'));
   }
 }
