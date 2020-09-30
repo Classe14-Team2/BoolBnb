@@ -36,5 +36,5 @@ Route::prefix('upr')
 
 // routes per gli utenti non registrati
 Route::resource('apartments','ApartmentController')->only('index','show');
-
 Route::post('/apartments/{aparment}', 'MessageController@store')->name('message.store');
+Route::get('/search','ApartmentController@search')->name('search');

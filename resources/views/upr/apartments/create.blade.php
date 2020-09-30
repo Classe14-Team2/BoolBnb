@@ -94,23 +94,16 @@
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
-        <script>
+  <script>
+  (function() {
+    var placesAutocomplete = places({
+      appId: 'pl72UD0E1RWC',
+      apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
+      container: document.querySelector('#address-new'),
 
-        (function() {
-          var placesAutocomplete = places({
-            appId: 'pl72UD0E1RWC',
-            apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
-            container: document.querySelector('#address-new'),
-
-          });
-
-          // var $address = document.querySelector('#address-value')
-
-
-        })();
-
-
-        </script>
+    });
+  })();
+  </script>
 
 
 

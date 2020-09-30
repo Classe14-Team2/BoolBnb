@@ -28,6 +28,23 @@
 $isUserAuth = isset($user_auth);
 @endphp
 
+<div id="mapid"></div>
+
+<script type="text/javascript">
+  var mymap = L.map('mapid').setView([{{ $apartment->lat }}, {{ $apartment->lon }}], 17);
+  var marker = L.marker([{{ $apartment->lat }}, {{ $apartment->lon }}]).addTo(mymap);
+  marker.bindPopup("{{$apartment->title}} <br> {{ $apartment->address}}").openPopup();
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox/streets-v11',
+  tileSize: 512,
+  zoomOffset: -1,
+  accessToken: 'pk.eyJ1IjoiY29ycmFkb2N0IiwiYSI6ImNrZm51YmF0NDBlZTQyeW9lYmpyNGpzcGYifQ.A43eZmLSH1fCHbMCGtG_Zg'
+  }).addTo(mymap);
+</script>
+
 @if ($isUserAuth === false || $user_auth->id !== $apartment->user_id)
   <div class="">
     <form class="" action="{{ route('message.store' , $apartment) }}" method="post">

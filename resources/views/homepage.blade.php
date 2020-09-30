@@ -87,14 +87,13 @@
                     HOME PAGE CON L INPUT DI RICERCA
                     <div class="">
                       <input type="search" id="address" class="form-control" placeholder="Where are we going?" />
-                        <button onclick="cerca()">Cerca</button>
+                        <button onclick="cerca()"> <a href="{{route('search')}}">Cerca </a></button>
 
                   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
                   <script>
                   function cerca() {
                      var getInput = document.querySelector('#address').value;
-                     console.log(getInput);
                      localStorage.setItem("storageName",getInput);
                   }
 
@@ -106,11 +105,6 @@
                     });
 
                     // var $address = document.querySelector('#address-value')
-
-
-
-
-
 
                       })();
                       </script>
