@@ -12,6 +12,21 @@
       </div>
   </div>
 
+  <div id="apartment_list"></div>
+
+  <script id="apartment_template" type="text/x-handlebars-template">
+    <div >
+      <h2>Titolo : @{{ title }}</h2>
+      <ul>
+        <li>Descrizione : @{{ description }}</li>
+        <li>Indirizzo : @{{ address }}</li>
+        <li>@{{ image }}</li>
+      </ul>
+    </div>
+  </script>
+
+  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+
 {{-- JS --}}
 
   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
