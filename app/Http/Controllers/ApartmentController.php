@@ -31,8 +31,6 @@ class ApartmentController extends Controller
 
   public function search()
   {
-      $users = User::all();
-      $apartments = Apartment::all();
-      return view('search', compact('apartments', 'users'));
+      return view('search');
   }
 }

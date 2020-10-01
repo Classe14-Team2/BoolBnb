@@ -87,7 +87,8 @@
                     HOME PAGE CON L INPUT DI RICERCA
                     <div class="">
                       <input type="search" id="address" class="form-control" placeholder="Where are we going?" />
-                        <button onclick="cerca()"> <a href="{{route('search')}}">Cerca </a></button>
+                      <span id="trova">trova</span>
+                        <button id="search_button" onclick="cerca()"> <a href="{{route('search')}}">Cerca </a></button>
 
                   <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
@@ -113,5 +114,6 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
