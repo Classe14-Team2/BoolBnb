@@ -77,6 +77,6 @@ $isUserAuth = isset($user_auth);
   @endif
 @endif
 
-  <a href="{{ route('apartments.index') }}">Torna indietro</a>
+  <a href="{{ route('search') }}">Torna alla ricerca</a>
 
 @endsection

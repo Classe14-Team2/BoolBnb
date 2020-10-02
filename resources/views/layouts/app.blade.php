@@ -27,12 +27,14 @@
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" charset="utf-8"></script>
+
     <style media="screen">
      #mapid { height: 400px; width: 400px; }
      #mapid-search { height: 600px; width: 600px; }
    </style>
 </head>
-<body>
+<body onload="loadCitta()">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -98,5 +100,5 @@
           IO SONO UN FOOTER
         </footer>
     </div>
-</body>
+  </body>
 </html>

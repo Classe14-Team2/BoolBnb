@@ -42345,6 +42345,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./search */ "./resources/js/search.js");
+
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
@@ -42364,10 +42366,13 @@ $(document).ready(function () {
         $('#lat').val(lat);
         $('#lon').val(lng);
       },
-      error: function error() {}
+      error: function error() {
+        alert('ciao');
+      }
     });
   });
-  $('#trova').click(function () {
+
+  function loadCitta() {
     var citta = $('#address').val();
     $.ajax({
       url: 'https://places-dsn.algolia.net/1/places/query?query=' + citta,
@@ -42382,29 +42387,54 @@ $(document).ready(function () {
       },
       error: function error() {}
     });
-  });
+  } // $('#trova').click(function() {
+  //
+  //   var citta = $('#address').val();
+  //     $.ajax({
+  //       url: 'https://places-dsn.algolia.net/1/places/query?query=' + citta,
+  //       method: 'GET',
+  //       success: function(data) {
+  //         var coord = data.hits[0]._geoloc;
+  //         var lat = coord.lat;
+  //         var lng = coord.lng;
+  //         console.log(lat);
+  //         console.log(lng);
+  //         searchCitta(lat, lng);
+  //       },
+  //       error: function() {
+  //       }
+  //     });
+  // });
 
-  function searchCitta(lat, lon) {
-    $.ajax({
-      url: 'http://localhost:8000/api/apisearch?lat=' + lat + '&lon=' + lon,
-      method: 'GET',
-      success: function success(dataResponse) {
-        var allApartments = dataResponse.apartments;
-        var source = $("#apartment_template").html();
-        var template = Handlebars.compile(source);
+});
 
-        for (var i = 0; i < allApartments.length; i++) {
-          var thisApartment = allApartments[i];
+function searchCitta(lat, lng) {
+  $.ajax({
+    url: 'http://localhost:8000/api/apisearch',
+    method: 'GET',
+    success: function success(dataResponse) {
+      var allApartments = dataResponse.apartments;
+      var source = $("#apartment-template").html();
+      console.log(source);
+      var template = Handlebars.compile(source);
+
+      for (var i = 0; i < allApartments.length; i++) {
+        var thisApartment = allApartments[i];
+
+        if (lat == thisApartment.lat && lng == thisApartment.lon) {
+          console.log('ok');
           var html = template(thisApartment);
           $('#apartment_list').append(html);
+        } else {
+          console.log('error');
         }
-      },
-      error: function error() {
-        alert('error');
       }
-    });
-  }
-});
+    },
+    error: function error() {
+      alert('error');
+    }
+  });
+}
 
 /***/ }),
 
@@ -42450,6 +42480,30 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/search.js":
+/*!********************************!*\
+  !*** ./resources/js/search.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function cerca() {
+  var getInput = document.querySelector('#address').value;
+}
+
+(function () {
+  var placesAutocomplete = places({
+    appId: 'pl72UD0E1RWC',
+    apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
+    container: document.querySelector('#address')
+  });
+})();
+
+localStorage.getItem("storageName");
+var place = document.querySelector('#address').value = localStorage.getItem("storageName");
 
 /***/ }),
 

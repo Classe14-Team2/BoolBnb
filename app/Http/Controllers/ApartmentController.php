@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Apartment;
+use App\Service;
 use App\User;
 
 class ApartmentController extends Controller
@@ -31,6 +32,7 @@ class ApartmentController extends Controller
 
   public function search()
   {
-      return view('search');
+      $services = Service::all();
+      return view('search', compact('services'));
   }
 }
