@@ -128,7 +128,7 @@ class ApartmentController extends Controller
     $request->validate($this->validationData());
 
     $request_data = $request->all();
-    
+
     if (isset($request_data['services'])) {
       $apartment->services()->sync($request_data['services']);
     } else {

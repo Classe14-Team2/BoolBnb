@@ -87,33 +87,29 @@
                     HOME PAGE CON L INPUT DI RICERCA
                     <div class="">
                       <input type="search" id="address" class="form-control" placeholder="Where are we going?" />
-                      <span id="trova">trova</span>
-                        <button id="search_button" onclick="cerca()"> <a href="{{route('search')}}">Cerca </a></button>
+                        <button onclick="cerca()"> <a href="{{route('search')}}">Cerca </a></button>
 
-                  <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
-                  <script>
-                  function cerca() {
-                     var getInput = document.querySelector('#address').value;
-                     localStorage.setItem("storageName",getInput);
-                  }
 
-                  (function() {
-                    var placesAutocomplete = places({
-                      appId: 'pl72UD0E1RWC',
-                      apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
-                      container: document.querySelector('#address')
-                    });
+                      <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
-                    // var $address = document.querySelector('#address-value')
+                      <script>
+                        function cerca() {
+                           var getInput = document.querySelector('#address').value;
+                           localStorage.setItem("storageName",getInput);
+                        }
 
-                      })();
+                        (function() {
+                          var placesAutocomplete = places({
+                            appId: 'pl72UD0E1RWC',
+                            apiKey: '6f2ccdf8214af2f289be15103d07cf1c',
+                            container: document.querySelector('#address')
+                          });
+                        })();
                       </script>
                     </div>
-
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
